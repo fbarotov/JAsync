@@ -92,25 +92,35 @@ To explore more, visit these links, which are the source of code snippets above
 Some benchmark results on Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz 2.00 GHz, 8 GB RAM,
 256 GB SSD, x64 Windows 10:
 
-        WRITE: operationsCount - 5000, ioSegmentLen - 10000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 2607, async: 982
+        WRITE: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: sync: 1297, async: 851
+        READ: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: sync: 574, async: 512
         
-        WRITE: operationsCount - 5000, ioSegmentLen - 10000, syncIOThreadCount - 20, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 1425, async: 766
+        WRITE: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 20, asyncIOThreadCount - 1. Runtime in MS: sync: 1272, async: 834
+        READ: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 20, asyncIOThreadCount - 1. Runtime in MS: sync: 538, async: 427
         
-        WRITE: operationsCount - 5000, ioSegmentLen - 10000, syncIOThreadCount - 30, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 1709, async: 651
+        WRITE: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 30, asyncIOThreadCount - 1. Runtime in MS: sync: 1327, async: 901
+        READ: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 30, asyncIOThreadCount - 1. Runtime in MS: sync: 517, async: 423
         
-        WRITE: operationsCount - 5000, ioSegmentLen - 10000, syncIOThreadCount - 40, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 1931, async: 691
+        WRITE: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 40, asyncIOThreadCount - 1. Runtime in MS: sync: 2272, async: 1219
+        READ: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 40, asyncIOThreadCount - 1. Runtime in MS: sync: 523, async: 404
         
-        WRITE: operationsCount - 5000, ioSegmentLen - 10000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 1951, async: 786
+        WRITE: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: sync: 1704, async: 787
+        READ: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: sync: 516, async: 413
         
-        WRITE: operationsCount - 15000, ioSegmentLen - 10000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 4856, async: 3736
+        WRITE: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: sync: 4227, async: 2608
+        READ: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: sync: 1589, async: 1283
         
-        WRITE: operationsCount - 15000, ioSegmentLen - 10000, syncIOThreadCount - 20, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 4438, async: 3346
+        WRITE: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 20, asyncIOThreadCount - 1. Runtime in MS: sync: 4562, async: 2481
+        READ: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 20, asyncIOThreadCount - 1. Runtime in MS: sync: 1535, async: 1273
         
-        WRITE: operationsCount - 15000, ioSegmentLen - 10000, syncIOThreadCount - 30, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 5341, async: 3850
+        WRITE: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 30, asyncIOThreadCount - 1. Runtime in MS: sync: 4294, async: 2098
+        READ: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 30, asyncIOThreadCount - 1. Runtime in MS: sync: 1559, async: 1257
         
-        WRITE: operationsCount - 15000, ioSegmentLen - 10000, syncIOThreadCount - 40, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 5337, async: 4374
+        WRITE: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 40, asyncIOThreadCount - 1. Runtime in MS: sync: 3610, async: 1959
+        READ: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 40, asyncIOThreadCount - 1. Runtime in MS: sync: 1578, async: 1269
         
-        WRITE: operationsCount - 15000, ioSegmentLen - 10000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 7135, async: 4725
+        WRITE: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: sync: 4030, async: 2003
+        READ: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: sync: 1618, async: 1291
 
 Some on MacOS:
 
