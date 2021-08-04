@@ -6,6 +6,7 @@ On Windows OS, `AsynchronousFileChannel.open(...)` returns `WindowsAsynchronousF
 When a write operation is issued into an asynchronous file channel, the following
 method is called:
 
+```java
     <A> Future<Integer> implWrite(ByteBuffer src,
                                   long position,
                                   A attachment,
@@ -23,9 +24,11 @@ method is called:
         writeTask.run();
         return result;
     }
+```
     
 To see actual async IO logic, let's peek `writeTask :: run`
 
+```java
         ...
         // initiate the write
         n = writeFile(handle, address, rem, position, overlapped);
@@ -36,6 +39,7 @@ To see actual async IO logic, let's peek `writeTask :: run`
         } else {
             throw new InternalError("Unexpected result: " + n);
         }
+```
 
 `writeFile` is a native method, and since under normal execution flow
 it must return pending status, it means there is some actual asynchronous 
@@ -50,12 +54,11 @@ So if we follow same code digging path as above, but for MacOS:
 
 * `AsynchronousFileChannel.open(...)` returns `SimpleAsynchronousFileChannelImpl`
 
-
+```java
     /**
     * "Portable" implementation of AsynchronousFileChannel for use on operating
     * systems that don't support asynchronous file I/O.
     */
-
     public class SimpleAsynchronousFileChannelImpl ...
         
         // lazy initialization of default thread pool for file I/O
@@ -63,6 +66,7 @@ So if we follow same code digging path as above, but for MacOS:
             static final ExecutorService defaultExecutor =
             ThreadPool.createDefault().executor();
         }
+```
 
 when calling `AsynchronousFileChannel.open(...)` either we pass an 
 executor service or the channel creates its own cached thread pool, which are
@@ -71,12 +75,14 @@ however, thread pool is used only for executing callbacks.
 
 On `SimpleAsynchronousFileChannelImpl` main write logic is as follows:
 
+```java
     ...
     Runnable task = new Runnable () {
         // issue blocking IO operation
     }
     executor.execute(task);
     ...
+```
 
 Regarding non-asynchronous file channel, i.e. `FileChannel`, write operations are
 always blocking and not even executor service is used.
@@ -91,7 +97,7 @@ To explore more, visit these links, which are the source of code snippets above
 
 Some benchmark results on Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz 2.00 GHz, 8 GB RAM,
 256 GB SSD, x64 Windows 10:
-
+```
         WRITE: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: sync: 1297, async: 851
         READ: operationsCount - 50000, ioSegmentLen - 1000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: sync: 574, async: 512
         
@@ -121,9 +127,10 @@ Some benchmark results on Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz 2.00 GHz, 8 G
         
         WRITE: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: sync: 4030, async: 2003
         READ: operationsCount - 150000, ioSegmentLen - 1000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: sync: 1618, async: 1291
+```
 
 Some on MacOS:
-
+```
     WRITE: operationsCount - 50000, ioSegmentLen - 10000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 3228, async: 2821
     READ: operationsCount - 50000, ioSegmentLen - 10000, syncIOThreadCount - 10, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 98, async: 180
     
@@ -153,3 +160,4 @@ Some on MacOS:
     
     WRITE: operationsCount - 150000, ioSegmentLen - 10000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 44054, async: 25371
     READ: operationsCount - 150000, ioSegmentLen - 10000, syncIOThreadCount - 50, asyncIOThreadCount - 1. Runtime in MS: 	 sync: 826, async: 2156
+```
